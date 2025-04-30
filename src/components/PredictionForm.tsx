@@ -22,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import formBg from '@/assets/form_bg.jpg';
+import formBg from '@/assets/hero_bg.jpg';
 
 interface PredictionFormProps {
   onBack: () => void;

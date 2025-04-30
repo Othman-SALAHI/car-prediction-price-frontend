@@ -8,7 +8,7 @@ import {
   TrendingUp, 
   Clock
 } from "lucide-react";
-import landingBg from '@/assets/landing_bg.jpg';
+import landingBg from '@/assets/hero_bg.jpg';
 
 interface LandingPageProps {
   onGetStarted: () => void;
