@@ -1,10 +1,9 @@
-
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import LandingPage from "@/components/LandingPage";
 import PredictionForm from "@/components/PredictionForm";
 import Footer from "@/components/Footer";
-
 const Index = () => {
   const [showForm, setShowForm] = useState(false);
 
@@ -22,10 +21,19 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar onGetStarted={handleGetStarted} onBack={handleBack} />
       <main className="flex-grow">
         {showForm ? (
-          <PredictionForm onBack={handleBack} />
+                      <motion.div
+                      key="form"
+                      initial={{ opacity: 0, x: 100 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -100 }}
+                      transition={{ duration: 0.5 }}
+                      className="w-full h-full absolute"
+                    >
+                      <PredictionForm onBack={handleBack} />
+                    </motion.div>
         ) : (
           <LandingPage onGetStarted={handleGetStarted} />
         )}

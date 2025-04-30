@@ -1,15 +1,14 @@
-
 import React, { useEffect, useState } from 'react';
 import { useToast } from "@/components/ui/use-toast";
 import { toast } from "sonner";
 import axios from 'axios';
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,9 +19,8 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from "@/components/ui/select";
-import formBg from '@/assets/hero_bg.jpg';
 
 interface PredictionFormProps {
   onBack: () => void;
@@ -30,7 +28,7 @@ interface PredictionFormProps {
 
 const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
   const { toast: uiToast } = useToast();
-  
+
   const [marques, setMarques] = useState<string[]>([]);
   const [gears, setGears] = useState<string[]>([]);
   const [models, setModels] = useState<string[]>([]);
@@ -47,7 +45,6 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
   const [result, setResult] = useState<number | null>(null);
 
   useEffect(() => {
-    // Fetch marques
     axios.get('https://web-production-0c18b.up.railway.app/v1/details/marques')
       .then(res => setMarques(Array.isArray(res.data) ? res.data : []))
       .catch(err => {
@@ -55,7 +52,6 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
         toast.error("Erreur lors du chargement des marques");
       });
 
-    // Fetch gears
     axios.get('https://web-production-0c18b.up.railway.app/v1/details/gear')
       .then(res => setGears(Array.isArray(res.data) ? res.data : []))
       .catch(err => {
@@ -67,7 +63,6 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
   const handleMarqueChange = (value: string) => {
     setSelectedMarque(value);
     setSelectedModel('');
-    
     if (value) {
       axios.get(`https://web-production-0c18b.up.railway.app/v1/details/${value}/models`)
         .then(res => setModels(Array.isArray(res.data) ? res.data : []))
@@ -82,9 +77,8 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!selectedMarque || !selectedModel || !selectedGear || !selectedFuel || 
-        !kilometrage || !annee || !cv) {
+
+    if (!selectedMarque || !selectedModel || !selectedGear || !selectedFuel || !kilometrage || !annee || !cv) {
       toast.error("Veuillez remplir tous les champs");
       return;
     }
@@ -92,11 +86,11 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
     setLoading(true);
 
     const payload = {
-      selectedGear: selectedGear,
-      selectedFuel: selectedFuel,
+      selectedGear,
+      selectedFuel,
       marques: selectedMarque,
       models: selectedModel,
-      premierMain: premierMain,
+      premierMain,
       kilometrage: parseFloat(kilometrage),
       annee: parseInt(annee),
       cv: parseInt(cv)
@@ -104,9 +98,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
 
     try {
       const response = await axios.post('https://web-production-0c18b.up.railway.app/predict', payload, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
       });
       setResult(response.data.price);
       toast.success("Prédiction réussie!");
@@ -119,50 +111,31 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
   };
 
   return (
-    <div 
-      className="container mx-auto p-4 md:p-8 max-w-4xl min-h-screen flex items-center justify-center"
-      // style={{
-      //   backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(${formBg})`,
-      //   backgroundPosition: 'center',
-      //   backgroundSize: 'cover',
-      //   backgroundRepeat: 'no-repeat',
-      //   backgroundAttachment: 'fixed'
-      // }}
-    >
-      <Button 
-        onClick={onBack} 
-        variant="outline" 
-        className="mb-6 absolute top-4 left-4"
-      >
-        <ArrowLeft className="mr-2 h-4 w-4" /> Retour
-      </Button>
-      
+    <div className="container mx-auto p-4 md:p-8 max-w-4xl min-h-screen flex items-center justify-center">
       <Card className="glass-card border-none shadow-lg w-full">
-        <CardHeader className="text-center">
+        <Button
+          onClick={onBack}
+          variant="ghost"
+          className="absolute top-8 left-4 text-muted-foreground hover:text-primary px-2 py-1 w-fit sm:w-auto"
+        >
+          <ArrowLeft className="h-5 w-5 mr-1" />
+          Retour
+        </Button>
+        <CardHeader className="text-center sm:mt-auto mt-12">
           <CardTitle className="text-3xl">Prédiction de Prix</CardTitle>
           <CardDescription>Estimez la valeur de votre voiture en quelques clics</CardDescription>
         </CardHeader>
 
-        <Button 
-        onClick={onBack} 
-        variant="outline" 
-        className="mb-6 absolute top-4 left-4"
-      >
-        <ArrowLeft className="mr-2 h-4 w-4" /> Retour
-      </Button>
 
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label htmlFor="marque" className="flex items-center gap-2">
+              <div className="space-y-2 w-full">
+                <Label className="flex items-center gap-2">
                   <Car className="h-4 w-4" /> Marque
                 </Label>
-                <Select 
-                  value={selectedMarque} 
-                  onValueChange={handleMarqueChange}
-                >
-                  <SelectTrigger>
+                <Select value={selectedMarque} onValueChange={handleMarqueChange}>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Sélectionner une marque" />
                   </SelectTrigger>
                   <SelectContent>
@@ -174,17 +147,17 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
                   </SelectContent>
                 </Select>
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="model" className="flex items-center gap-2">
+
+              <div className="space-y-2 w-full">
+                <Label className="flex items-center gap-2">
                   <Car className="h-4 w-4" /> Modèle
                 </Label>
-                <Select 
-                  value={selectedModel} 
+                <Select
+                  value={selectedModel}
                   onValueChange={setSelectedModel}
                   disabled={!selectedMarque || models.length === 0}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Sélectionner un modèle" />
                   </SelectTrigger>
                   <SelectContent>
@@ -196,16 +169,13 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
                   </SelectContent>
                 </Select>
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="gear" className="flex items-center gap-2">
+
+              <div className="space-y-2 w-full">
+                <Label className="flex items-center gap-2">
                   <Gauge className="h-4 w-4" /> Transmission
                 </Label>
-                <Select 
-                  value={selectedGear} 
-                  onValueChange={setSelectedGear}
-                >
-                  <SelectTrigger>
+                <Select value={selectedGear} onValueChange={setSelectedGear}>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Sélectionner une transmission" />
                   </SelectTrigger>
                   <SelectContent>
@@ -217,16 +187,13 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
                   </SelectContent>
                 </Select>
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="fuel" className="flex items-center gap-2">
+
+              <div className="space-y-2 w-full">
+                <Label className="flex items-center gap-2">
                   <Fuel className="h-4 w-4" /> Carburant
                 </Label>
-                <Select 
-                  value={selectedFuel} 
-                  onValueChange={setSelectedFuel}
-                >
-                  <SelectTrigger>
+                <Select value={selectedFuel} onValueChange={setSelectedFuel}>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Sélectionner un type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -237,9 +204,9 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
                   </SelectContent>
                 </Select>
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="annee" className="flex items-center gap-2">
+
+              <div className="space-y-2 w-full">
+                <Label className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" /> Année
                 </Label>
                 <Input
@@ -248,28 +215,30 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
                   placeholder="2020"
                   value={annee}
                   onChange={(e) => setAnnee(e.target.value)}
+                  className="w-full"
                   min="1950"
                   max="2025"
                 />
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="kilometrage" className="flex items-center gap-2">
-                <Car className="h-4 w-4" /> Kilométrage (km)
-                  </Label>
+
+              <div className="space-y-2 w-full">
+                <Label className="flex items-center gap-2">
+                  <Car className="h-4 w-4" /> Kilométrage (km)
+                </Label>
                 <Input
                   id="kilometrage"
                   type="number"
                   placeholder="50000"
                   value={kilometrage}
                   onChange={(e) => setKilometrage(e.target.value)}
+                  className="w-full"
                   min="0"
                 />
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="cv" className="flex items-center gap-2">
-                <Car className="h-4 w-4" /> Puissance (CV)
+
+              <div className="space-y-2 w-full">
+                <Label className="flex items-center gap-2">
+                  <Car className="h-4 w-4" /> Puissance (CV)
                 </Label>
                 <Input
                   id="cv"
@@ -277,19 +246,17 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
                   placeholder="6"
                   value={cv}
                   onChange={(e) => setCv(e.target.value)}
+                  className="w-full"
                   min="1"
                 />
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="premierMain" className="flex items-center gap-2">
-                <Car className="h-4 w-4" /> Premier Main
+
+              <div className="space-y-2 w-full">
+                <Label className="flex items-center gap-2">
+                  <Car className="h-4 w-4" /> Premier Main
                 </Label>
-                <Select 
-                  value={premierMain} 
-                  onValueChange={setPremierMain}
-                >
-                  <SelectTrigger>
+                <Select value={premierMain} onValueChange={setPremierMain}>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Premier propriétaire?" />
                   </SelectTrigger>
                   <SelectContent>
@@ -300,16 +267,12 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
               </div>
             </div>
           </CardContent>
-          
-          <CardFooter className="flex flex-col gap-4">
-            <Button 
-              type="submit" 
-              className="w-full" 
-              disabled={loading}
-            >
+
+          <CardFooter className="flex flex-col gap-4 w-full">
+            <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Calcul en cours..." : "Prédire le prix"}
             </Button>
-            
+
             {result !== null && (
               <div className="w-full mt-4 p-4 bg-secondary/10 rounded-lg text-center">
                 <p className="text-lg font-medium">Prix estimé:</p>
