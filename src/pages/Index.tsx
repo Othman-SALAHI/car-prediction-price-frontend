@@ -1,22 +1,36 @@
 
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Features from "@/components/Features";
-import HowItWorks from "@/components/HowItWorks";
-import PredictionTool from "@/components/PredictionTool";
+import LandingPage from "@/components/LandingPage";
+import PredictionForm from "@/components/PredictionForm";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const [showForm, setShowForm] = useState(false);
+
+  const handleGetStarted = () => {
+    setShowForm(true);
+    // Scroll to top when switching views
+    window.scrollTo(0, 0);
+  };
+
+  const handleBack = () => {
+    setShowForm(false);
+    // Scroll to top when switching views
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        <Hero />
-        <Features />
-        <HowItWorks />
-        <PredictionTool />
+        {showForm ? (
+          <PredictionForm onBack={handleBack} />
+        ) : (
+          <LandingPage onGetStarted={handleGetStarted} />
+        )}
       </main>
-      <Footer />
+      {!showForm && <Footer />}
     </div>
   );
 };
