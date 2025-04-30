@@ -48,7 +48,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
 
   useEffect(() => {
     // Fetch marques
-    axios.get('http://127.0.0.1:5001/v1/details/marques')
+    axios.get('https://web-production-0c18b.up.railway.app/v1/details/marques')
       .then(res => setMarques(Array.isArray(res.data) ? res.data : []))
       .catch(err => {
         console.error("Error fetching marques:", err);
@@ -56,7 +56,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
       });
 
     // Fetch gears
-    axios.get('http://127.0.0.1:5001/v1/details/gear')
+    axios.get('https://web-production-0c18b.up.railway.app/v1/details/gear')
       .then(res => setGears(Array.isArray(res.data) ? res.data : []))
       .catch(err => {
         console.error("Error fetching gears:", err);
@@ -69,7 +69,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
     setSelectedModel('');
     
     if (value) {
-      axios.get(`http://127.0.0.1:5001/v1/details/${value}/models`)
+      axios.get(`https://web-production-0c18b.up.railway.app/v1/details/${value}/models`)
         .then(res => setModels(Array.isArray(res.data) ? res.data : []))
         .catch(err => {
           console.error("Error fetching models:", err);
