@@ -32,7 +32,7 @@ const Navbar: React.FC<NavBarProps> = ({ onGetStarted, onBack }) => {
             <a href="#prediction-tool" className="text-gray-600 hover:text-primary transition-colors">
               Try It
             </a>
-            <Button onClick={onGetStarted} variant="default">Get Started</Button>
+            <Button onClick={() => { onGetStarted(); setIsOpen(false); }} variant="default">Get Started</Button>
           </div>
           
           {/* Mobile menu button */}
