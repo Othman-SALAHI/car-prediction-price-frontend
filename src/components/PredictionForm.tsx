@@ -236,7 +236,9 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="kilometrage">Kilométrage (km)</Label>
+                <Label htmlFor="kilometrage" className="flex items-center gap-2">
+                <Car className="h-4 w-4" /> Kilométrage (km)
+                  </Label>
                 <Input
                   id="kilometrage"
                   type="number"
@@ -248,7 +250,9 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="cv">Puissance (CV)</Label>
+                <Label htmlFor="cv" className="flex items-center gap-2">
+                <Car className="h-4 w-4" /> Puissance (CV)
+                </Label>
                 <Input
                   id="cv"
                   type="number"
@@ -260,7 +264,9 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="premierMain">Premier Main</Label>
+                <Label htmlFor="premierMain" className="flex items-center gap-2">
+                <Car className="h-4 w-4" /> Premier Main
+                </Label>
                 <Select 
                   value={premierMain} 
                   onValueChange={setPremierMain}

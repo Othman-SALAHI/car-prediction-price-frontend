@@ -17,7 +17,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="hero-section text-white">
+      <section className="hero-section text-white"
+      style={{ backgroundImage: "url('/components/assets/hero_bg.jpg')"}}
+      >
         <div className="container mx-auto px-4 z-10 relative">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-float">
             Estimez le Prix de Votre Voiture
