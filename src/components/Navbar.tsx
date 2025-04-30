@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ChartBar, Menu, X } from "lucide-react";
 
-const Navbar = () => {
+interface NavBarProps {
+  onGetStarted: () => void;
+}
+const Navbar: React.FC<NavBarProps> = ({ onGetStarted }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -28,7 +31,7 @@ const Navbar = () => {
             <a href="#prediction-tool" className="text-gray-600 hover:text-primary transition-colors">
               Try It
             </a>
-            <Button variant="default">Get Started</Button>
+            <Button onClick={onGetStarted} variant="default">Get Started</Button>
           </div>
           
           {/* Mobile menu button */}
