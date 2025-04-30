@@ -31,7 +31,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-float">
             Estimez le Prix de Votre Voiture
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-muted-foreground">
             Notre outil de prédiction utilise l'intelligence artificielle pour vous fournir une estimation précise en quelques secondes.
           </p>
           <Button 

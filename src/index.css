@@ -74,7 +74,7 @@
   .hero-section {
     @apply relative min-h-[80vh] flex flex-col items-center justify-center text-center p-6;
     background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
-    url('/src/assets/landing_bg.jpg'); /* Make sure the path is correct */
+    url('/src/assets/bmw_bg.jpg'); /* Make sure the path is correct */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -83,7 +83,7 @@
   
   .card-gradient {
     background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
-    url('/src/assets/landing_bg.jpg'); /* Make sure the path is correct */
+    url('/src/assets/bmw_bg.jpg'); /* Make sure the path is correct */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
