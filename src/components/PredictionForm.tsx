@@ -103,7 +103,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
     };
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/predict', payload, {
+      const response = await axios.post('https://web-production-0c18b.up.railway.app/predict', payload, {
         headers: {
           'Content-Type': 'application/json'
         }
