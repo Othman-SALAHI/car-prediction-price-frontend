@@ -20,12 +20,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
       {/* Hero Section */}
       <section 
         className="hero-section text-white relative"
-        style={{ 
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${landingBg})`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat'
-        }}
+        // style={{ 
+        //   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${landingBg})`,
+        //   backgroundPosition: 'center',
+        //   backgroundSize: 'cover',
+        //   backgroundRepeat: 'no-repeat'
+        // }}
       >
         <div className="container mx-auto px-4 z-10 relative">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-float">

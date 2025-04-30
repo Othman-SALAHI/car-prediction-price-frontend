@@ -121,13 +121,13 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
   return (
     <div 
       className="container mx-auto p-4 md:p-8 max-w-4xl min-h-screen flex items-center justify-center"
-      style={{
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(${formBg})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}
+      // style={{
+      //   backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(${formBg})`,
+      //   backgroundPosition: 'center',
+      //   backgroundSize: 'cover',
+      //   backgroundRepeat: 'no-repeat',
+      //   backgroundAttachment: 'fixed'
+      // }}
     >
       <Button 
         onClick={onBack} 
@@ -142,7 +142,15 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
           <CardTitle className="text-3xl">Prédiction de Prix</CardTitle>
           <CardDescription>Estimez la valeur de votre voiture en quelques clics</CardDescription>
         </CardHeader>
-        
+
+        <Button 
+        onClick={onBack} 
+        variant="outline" 
+        className="mb-6 absolute top-4 left-4"
+      >
+        <ArrowLeft className="mr-2 h-4 w-4" /> Retour
+      </Button>
+
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
