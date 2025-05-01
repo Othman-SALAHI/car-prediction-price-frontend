@@ -45,14 +45,14 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
   const [result, setResult] = useState<number | null>(null);
 
   useEffect(() => {
-    axios.get('https://web-production-0c18b.up.railway.app/v1/details/marques')
+    axios.get('https://web-production-cd525.up.railway.app/v1/details/marques')
       .then(res => setMarques(Array.isArray(res.data) ? res.data : []))
       .catch(err => {
         console.error("Error fetching marques:", err);
         toast.error("Erreur lors du chargement des marques");
       });
 
-    axios.get('https://web-production-0c18b.up.railway.app/v1/details/gear')
+    axios.get('https://web-production-cd525.up.railway.app/v1/details/gear')
       .then(res => setGears(Array.isArray(res.data) ? res.data : []))
       .catch(err => {
         console.error("Error fetching gears:", err);
@@ -64,7 +64,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
     setSelectedMarque(value);
     setSelectedModel('');
     if (value) {
-      axios.get(`https://web-production-0c18b.up.railway.app/v1/details/${value}/models`)
+      axios.get(`https://web-production-cd525.up.railway.app/v1/details/${value}/models`)
         .then(res => setModels(Array.isArray(res.data) ? res.data : []))
         .catch(err => {
           console.error("Error fetching models:", err);
@@ -97,7 +97,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onBack }) => {
     };
 
     try {
-      const response = await axios.post('https://web-production-0c18b.up.railway.app/predict', payload, {
+      const response = await axios.post('https://web-production-cd525.up.railway.app/predict', payload, {
         headers: { 'Content-Type': 'application/json' }
       });
       setResult(response.data.price);
